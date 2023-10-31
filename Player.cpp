@@ -124,4 +124,5 @@ void Player::Draw()
 		1.0, 0.0,
 		m_handle, true, false);
 	DrawFormatString(0, 0, GetColor(255, 255, 255), "%d", static_cast<int>(m_AnimPos.x));
+	DrawFormatString(0, 20, GetColor(255, 255, 255), "%d", static_cast<int>(m_pos.x));
 }

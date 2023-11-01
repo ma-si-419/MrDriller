@@ -28,6 +28,8 @@ public:
 	//シーンからプレイヤーにグラフィックを渡す
 	void SetHandle(int handle) { m_handle = handle; }
 
+	//プレイヤーの当たり判定を取得する
+	Rect GetColRect() { return m_colRect; }
 private:
 	//表示位置
 	Vec2 m_pos;

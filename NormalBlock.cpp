@@ -1,4 +1,5 @@
 #include "NormalBlock.h"
+#include "DxLib.h"
 
 NormalBlock::NormalBlock()
 {
@@ -18,12 +19,9 @@ void NormalBlock::Update()
 	{
 		return;
 	}
-
-
-
-
 }
 
 void NormalBlock::Draw() const
 {
+	DrawGraph(0, 0, m_handle, true);
 }

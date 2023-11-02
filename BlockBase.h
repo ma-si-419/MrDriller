@@ -13,6 +13,8 @@ public:
 
 	Rect GetColRect() const { return m_colRect; }
 
+	void SetPos(Vec2 pos) { m_pos = pos; }
+
 	//シーンからプレイヤーにグラフィックを渡す
 	void SetHandle(int handle) { m_handle = handle; }
 

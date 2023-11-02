@@ -6,7 +6,7 @@
 
 namespace
 {
-	constexpr int kBlockMax = 1;
+	constexpr int kBlockMax = 20;
 }
 
 SceneMain::SceneMain()
@@ -78,16 +78,21 @@ void SceneMain::Update()
 			}
 		}
 	}
+	Vec2 blockPos;
+
+	blockPos.x = GetRand(640);
+	blockPos.y = GetRand(480);
+
 	switch (GetRand(2))
 	{
 	case 0:	// Letf
-		CreateRedBlock();
+		CreateRedBlock(blockPos);
 		break;
 	case 1:	// Right
-		CreateBlueBlock();
+		CreateBlueBlock(blockPos);
 		break;
 	case 2:	// ToPlayer
-		CreateYellowBlock();
+		CreateYellowBlock(blockPos);
 		break;
 	}
 	
@@ -105,7 +110,7 @@ void SceneMain::Draw()
 	}
 }
 
-void SceneMain::CreateRedBlock()
+void SceneMain::CreateRedBlock(Vec2 pos)
 {
 	for (int i = 0; i < m_pBlock.size(); i++)
 	{
@@ -119,7 +124,7 @@ void SceneMain::CreateRedBlock()
 	}
 }
 
-void SceneMain::CreateBlueBlock()
+void SceneMain::CreateBlueBlock(Vec2 pos)
 {
 	for (int i = 0; i < m_pBlock.size(); i++)
 	{
@@ -133,7 +138,7 @@ void SceneMain::CreateBlueBlock()
 	}
 }
 
-void SceneMain::CreateYellowBlock()
+void SceneMain::CreateYellowBlock(Vec2 pos)
 {
 	for (int i = 0; i < m_pBlock.size(); i++)
 	{

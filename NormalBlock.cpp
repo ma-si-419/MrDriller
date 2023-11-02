@@ -23,5 +23,5 @@ void NormalBlock::Update()
 
 void NormalBlock::Draw() const
 {
-	DrawGraph(0, 0, m_handle, true);
+	DrawGraph(m_pos.x, m_pos.y, m_handle, true);
 }

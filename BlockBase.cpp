@@ -2,7 +2,9 @@
 
 BlockBase::BlockBase():
 	m_hp(0),
-	m_isExist(false)
+	m_isExist(false),
+	m_color(0),
+	m_handle(-1)
 {
 }
 

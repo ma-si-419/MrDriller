@@ -30,6 +30,9 @@ public:
 
 	//プレイヤーの当たり判定を取得する
 	Rect GetColRect() { return m_colRect; }
+
+	//地面に当たっているかどうか設定する
+	void SetGroundFlag(bool _isFlag) { m_isGroundFlag = _isFlag; }
 private:
 	//表示位置
 	Vec2 m_pos;
@@ -43,5 +46,7 @@ private:
 	Dir m_dir;
 	// 歩きアニメーション
 	int m_walkAnimFrame;
+	//地面についてるかどうか
+	bool m_isGroundFlag;
 };
 

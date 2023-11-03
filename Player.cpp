@@ -18,10 +18,11 @@ namespace
 	// アニメーションの１サイクルのフレーム数
 	constexpr int kAnimFrameCycle = _countof(kUseFrame) * kAnimFrameNum;
 }
-Player::Player():
+Player::Player() :
 	m_walkAnimFrame(kAnimFrameNum),
 	m_handle(-1),
 	m_dir(kDirDown),
+	m_isGroundFlag(false),
 	m_pos(Game::kScreenWidth / 2, Game::kScreenHeight / 2)
 {
 }
@@ -42,34 +43,53 @@ void Player::Update()
 	Vec2 move{ 0.0f,0.0f };
 
 	bool isMove = false;
-
-	if (pad & PAD_INPUT_UP)
+	//落下中は移動入力ができない
+	if (!m_isGroundFlag)
 	{
-		m_dir = kDirUp;
 
-		if (m_pos.y < 0)	m_pos.y = 0;
+		if (pad & PAD_INPUT_UP)
+		{
+			m_dir = kDirUp;
+
+			//画面外に出ようとしたら画面内に戻す
+			if (m_pos.y < 0)
+			{
+				m_pos.y = 0;
+			}
+		}
+		if (pad & PAD_INPUT_DOWN)
+		{
+			m_dir = kDirDown;
+
+			//画面外に出ようとしたら画面内を戻す
+			if (Game::kScreenHeight - kGraphHeight < m_pos.y)
+			{
+				m_pos.y = Game::kScreenHeight - kGraphHeight;
+			}
+		}
+		if (pad & PAD_INPUT_LEFT)
+		{
+			move.x--;
+			m_dir = kDirLeft;
+			isMove = true;
+
+			if (m_pos.x < 0)	m_pos.x = 0;
+		}
+		if (pad & PAD_INPUT_RIGHT)
+		{
+			move.x++;
+			m_dir = kDirRight;
+			isMove = true;
+
+			if (Game::kScreenWidth - kGraphWidth < m_pos.x)	m_pos.x = Game::kScreenWidth - kGraphWidth;
+		}
 	}
-	if (pad & PAD_INPUT_DOWN)
+	//落下中の処理
+	else
 	{
-		m_dir = kDirDown;
+		move.y++;
+		/*落下のアニメーション入れる*/
 
-		if (Game::kScreenHeight - kGraphHeight < m_pos.y)	m_pos.y = Game::kScreenHeight - kGraphHeight;
-	}
-	if (pad & PAD_INPUT_LEFT)
-	{
-		move.x--;
-		m_dir = kDirLeft;
-		isMove = true;
-
-		if (m_pos.x < 0)	m_pos.x = 0;
-	}
-	if (pad & PAD_INPUT_RIGHT)
-	{
-		move.x++;
-		m_dir = kDirRight;
-		isMove = true;
-
-		if (Game::kScreenWidth - kGraphWidth < m_pos.x)	m_pos.x = Game::kScreenWidth - kGraphWidth;
 	}
 	// 正規化
 	move.Normalize();
@@ -112,9 +132,9 @@ void Player::Update()
 
 void Player::Draw()
 {
-//	if (m_damageFrame % 4 >= 2) return;
+	//	if (m_damageFrame % 4 >= 2) return;
 
-	//アニメーション
+		//アニメーション
 	m_AnimPos.x = kGraphWidth * kUseFrame[m_walkAnimFrame / kAnimFrameNum];
 	m_AnimPos.y = kGraphHeight * m_dir;
 

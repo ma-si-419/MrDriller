@@ -43,6 +43,8 @@ public:
 	/// <returns>true : “–‚½‚Á‚½, false : “–‚½‚Á‚Ä‚È‚¢</returns>
 	bool IsCollsion(const Rect& target);
 
+	//’n–Ê‚É“–‚½‚Á‚Ä‚¢‚é‚©‚Ç‚¤‚©‚ğ”»’è‚·‚éŠÖ”
+	bool IsGroundCollision(const Rect& target);
 private:
 	float m_left;	// ¶‚ÌXÀ•W (¶ã)
 	float m_top;	// ã‚ÌYÀ•W (¶ã)

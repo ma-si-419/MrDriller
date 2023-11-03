@@ -15,9 +15,7 @@ public:
 	void Update();
 	void Draw();
 private:
-	void CreateRedBlock(Vec2 pos);
-	void CreateBlueBlock(Vec2 pos);
-	void CreateYellowBlock(Vec2 pos);
+	void CreateBlock(Vec2 pos);
 private:
 	//プレイヤーのポインタを格納する変数
 	Player* m_pPlayer;

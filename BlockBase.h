@@ -20,6 +20,8 @@ public:
 
 	bool IsExist() const { return m_isExist; }
 
+	void UpdateCollision();
+
 protected:
 	//ブロックのヒットポイント
 	int m_hp;

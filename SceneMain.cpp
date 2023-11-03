@@ -70,9 +70,11 @@ void SceneMain::Update()
 				delete block;
 				block = nullptr;	// 使っていないと分かるように
 			}
-			// 存在しているブロックとプレイヤーと当たり判定
-			else if (playerRect.IsCollsion(block->GetColRect()))
+			// 足元にあるブロックとプレイヤーと当たり判定
+			else if (playerRect.IsGroundCollision(block->GetColRect()))
 			{
+				//プレイヤーの自由落下を止める
+				m_pPlayer->SetGroundFlag(true);
 				// test
 				printfDx("当たっている\n");
 			}
@@ -86,13 +88,7 @@ void SceneMain::Update()
 	switch (GetRand(2))
 	{
 	case 0:	// Letf
-		CreateRedBlock(blockPos);
-		break;
-	case 1:	// Right
-		CreateBlueBlock(blockPos);
-		break;
-	case 2:	// ToPlayer
-		CreateYellowBlock(blockPos);
+		CreateBlock(blockPos);
 		break;
 	}
 	
@@ -110,7 +106,7 @@ void SceneMain::Draw()
 	}
 }
 
-void SceneMain::CreateRedBlock(Vec2 pos)
+void SceneMain::CreateBlock(Vec2 pos)
 {
 	for (int i = 0; i < m_pBlock.size(); i++)
 	{
@@ -118,36 +114,10 @@ void SceneMain::CreateRedBlock(Vec2 pos)
 		{
 			m_pBlock[i] = new NormalBlock;
 			m_pBlock[i]->Init();
+			m_pBlock[i]->SetPos(pos);
 			m_pBlock[i]->SetHandle(m_blockHandle);
 			return;// 一体分確保できたら終了
 		}
 	}
 }
 
-void SceneMain::CreateBlueBlock(Vec2 pos)
-{
-	for (int i = 0; i < m_pBlock.size(); i++)
-	{
-		if (!m_pBlock[i])	// nullptrであるチェック
-		{
-			m_pBlock[i] = new NormalBlock;
-			m_pBlock[i]->Init();
-			m_pBlock[i]->SetHandle(m_blockHandle);
-			return;// 一体分確保できたら終了
-		}
-	}
-}
-
-void SceneMain::CreateYellowBlock(Vec2 pos)
-{
-	for (int i = 0; i < m_pBlock.size(); i++)
-	{
-		if (!m_pBlock[i])	// nullptrであるチェック
-		{
-			m_pBlock[i] = new NormalBlock;
-			m_pBlock[i]->Init();
-			m_pBlock[i]->SetHandle(m_blockHandle);
-			return;// 一体分確保できたら終了
-		}
-	}
-}

@@ -11,6 +11,8 @@ NormalBlock::~NormalBlock()
 
 void NormalBlock::Init()
 {
+	m_isExist = true;
+	m_color = GetRand(3);
 }
 
 void NormalBlock::Update()
@@ -19,9 +21,4 @@ void NormalBlock::Update()
 	{
 		return;
 	}
-}
-
-void NormalBlock::Draw() const
-{
-	DrawGraph(m_pos.x, m_pos.y, m_handle, true);
 }

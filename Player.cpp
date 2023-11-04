@@ -44,7 +44,7 @@ void Player::Update()
 
 	bool isMove = false;
 	//—Ž‰º’†‚ÍˆÚ“®“ü—Í‚ª‚Å‚«‚È‚¢
-	if (!m_isGroundFlag)
+	if (m_isGroundFlag)
 	{
 
 		if (pad & PAD_INPUT_UP)

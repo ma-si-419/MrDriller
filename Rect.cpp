@@ -67,10 +67,17 @@ bool Rect::IsCollsion(const Rect& target)
 
 bool Rect::IsGroundCollision(const Rect& target)
 {
-	if (target.m_right < m_left) return false;//自分よりも左にいる場合
-	if (m_right < target.m_left) return false;//自分よりも右にいる場合
-	//ターゲットの上部よりも少しだけ上にいたらtrueを返す
-	if (m_bottom = target.m_top + 0.1f) return true;
+	if (target.m_right < m_left)return false;//自分よりも左にいる場合と
 
+	if (m_right < target.m_left)return false;//自分よりも右にいる場合は何もしない
+
+	//自分の上辺よりも下に行ったら
+	if (m_bottom > target.m_top)
+	{
+		//自分の上辺と同じ高さまで戻す
+		m_bottom = target.m_top;
+		return true;
+	}
 	return false;
 }
+

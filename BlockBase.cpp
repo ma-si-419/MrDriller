@@ -16,6 +16,9 @@ BlockBase::BlockBase():
 BlockBase::~BlockBase()
 {
 }
+void BlockBase::Update()
+{
+}
 void BlockBase::Draw() const
 {
 	// ’†SˆÊ’u‚ğŠî€‚Æ‚µ‚Ä•`‰æ‚·‚é

@@ -6,7 +6,7 @@
 
 namespace
 {
-	constexpr int kBlockMax = 20;
+	constexpr int kBlockMax = 21;
 }
 
 SceneMain::SceneMain()
@@ -14,7 +14,7 @@ SceneMain::SceneMain()
 	// グラフィックのロード
 	m_playerHandle = LoadGraph("data/image/player.png");
 	assert(m_playerHandle != -1);
-	m_blockHandle = LoadGraph("data/image/RedBlock.png");
+	m_blockHandle = LoadGraph("data/image/GreenBlock.png");
 	assert(m_blockHandle != -1);
 	//プレイヤーのメモリ確保
 	m_pPlayer = new Player;
@@ -71,26 +71,32 @@ void SceneMain::Update()
 				block = nullptr;	// 使っていないと分かるように
 			}
 			// 足元にあるブロックとプレイヤーと当たり判定
-			else if (playerRect.IsGroundCollision(block->GetColRect()))
+			else if (!playerRect.IsGroundCollision(block->GetColRect()))
 			{
 				//プレイヤーの自由落下を止める
-				m_pPlayer->SetGroundFlag(true);
+				m_pPlayer->SetGroundFlag(false);
 				// test
+				//printfDx("当たっていない\n");
+			}
+			else
+			{
+				m_pPlayer->SetGroundFlag(true);
 				printfDx("当たっている\n");
+
 			}
 		}
 	}
 	Vec2 blockPos;
+	blockPos.x += GetRand(60) + 320;
+	blockPos.y = 440;
 
-	blockPos.x = GetRand(640);
-	blockPos.y = GetRand(480);
-
-	switch (GetRand(2))
-	{
-	case 0:	// Letf
+	//出てくるブロックアイテムに種類があるのでスイッチ文で分ける
+//	switch (GetRand(2))
+//	{
+//	case 0:	
 		CreateBlock(blockPos);
-		break;
-	}
+//		break;
+//	}
 	
 }
 

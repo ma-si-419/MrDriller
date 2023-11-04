@@ -8,8 +8,8 @@ public:
 	virtual ~BlockBase();
 
 	virtual void Init() = 0;
-	virtual void Update() = 0;
-	virtual void Draw() const = 0;
+	virtual void Update();
+	virtual void Draw() const;
 
 	Rect GetColRect() const { return m_colRect; }
 

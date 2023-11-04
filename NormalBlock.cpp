@@ -17,8 +17,9 @@ void NormalBlock::Init()
 
 void NormalBlock::Update()
 {
-	if (!m_isExist)
-	{
-		return;
-	}
+	// 存在しないブロックの処理はしない
+	if (!m_isExist) return;
+
+	//当たり判定の更新 
+	UpdateCollision();
 }
